@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AppointmentScheduled;
 use App\Models\Booking;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -30,6 +32,10 @@ class BookingController extends Controller
         $staffMember = Staff::find($id);
 
         $staffMember->update(['availability' => false]);
+
+        //to = receiver email
+        //send = Mailable class instance
+        Mail::to(Auth::user()->email)->send(new AppointmentScheduled($booking));
     }
 
     public function show($id) {}
