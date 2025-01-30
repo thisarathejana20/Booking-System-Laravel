@@ -26,4 +26,17 @@ class AdminController extends Controller
             'fistFiveAdmins' => $firstFiveAdmins
         ]);
     }
+
+    public function charts()
+    {
+        Gate::authorize('admin');
+        $dates = [];
+        for ($i = 4; $i >= 0; $i--) {
+            $dates[$i] = Carbon::today()->subDays($i)->toDateString();
+        }
+        for ($i = 0; $i < count($dates); $i++) {
+            $totalBookingsPerDate[$dates[$i]] = Booking::where('date', $dates[$i])->count();
+        }
+        return view('admin.chart', compact('totalBookingsPerDate'));
+    }
 }

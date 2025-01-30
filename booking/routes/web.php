@@ -45,3 +45,6 @@ Route::delete('/staff-delete/{id}', [StaffController::class, 'destroy'])->middle
 Route::get('/staff-view', [StaffViewController::class, 'index'])->middleware('auth');
 Route::post('/staff-pic', [StaffViewController::class, 'update_pic'])->middleware('auth');
 Route::post('/booking-complete/{id}', [BookingController::class, 'complete'])->middleware('auth');;
+
+//analytics
+Route::get('/analytics', [AdminController::class, 'charts'])->middleware('auth');
