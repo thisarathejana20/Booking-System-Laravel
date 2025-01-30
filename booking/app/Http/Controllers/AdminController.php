@@ -30,6 +30,7 @@ class AdminController extends Controller
     public function charts()
     {
         Gate::authorize('admin');
+        //bookings count
         $dates = [];
         for ($i = 4; $i >= 0; $i--) {
             $dates[$i] = Carbon::today()->subDays($i)->toDateString();
@@ -37,6 +38,12 @@ class AdminController extends Controller
         for ($i = 0; $i < count($dates); $i++) {
             $totalBookingsPerDate[$dates[$i]] = Booking::where('date', $dates[$i])->count();
         }
-        return view('admin.chart', compact('totalBookingsPerDate'));
+
+        //staff count
+        $staffByField['Medical'] = User::where('role', 'staff')
+            ->where('resource_id', '1')->count();
+        $staffByField['Education'] = User::where('role', 'staff')
+            ->where('resource_id', '2')->count();
+        return view('admin.chart', compact('totalBookingsPerDate', 'staffByField'));
     }
 }

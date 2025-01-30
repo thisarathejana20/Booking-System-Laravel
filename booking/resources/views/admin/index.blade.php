@@ -16,6 +16,10 @@
                 class="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transform transition duration-200 ease-in-out hover:scale-105">
                 Add a New Admin
             </a>
+            <a href="/analytics"
+                class="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transform transition duration-200 ease-in-out hover:scale-105">
+                View Analytics
+            </a>
         </div>
 
         <!-- Stats Cards -->
